@@ -1,0 +1,1469 @@
+/* ═══════════════════════════════════════════════════════════════════════════════════════════
+ * Pump Family — the design system.
+ *
+ * ## Where this comes from
+ *
+ * The palette is taken from the operator's own mark, `public/logo.png`, sampled rather than
+ * guessed: a mint green #66D896 and a pale periwinkle #E4E4FC. Those two are the brand, and
+ * everything here is built from them.
+ *
+ * The ground is a near-black carrying a BLUE bias, which is the house note across the family —
+ * the sibling sites sit on #05060A and #060510. A neutral #0a0a0a would read as unconsidered next
+ * to either. This sits between them.
+ *
+ * ⭐ The green does the ACTIONS and the periwinkle does the DISPLAY. the sibling site spends its
+ * boldness on violet actions; matching that would make this a copy rather than a sibling. Using
+ * our own green where they use violet is what gives this its own voice inside the same family.
+ *
+ * ## Type
+ *
+ * Outfit for display — geometric, and it holds together at 140px with tight negative tracking,
+ * which is what a wordmark hero needs. Instrument Sans for the interface, which is the family's
+ * own UI face. JetBrains Mono, tabular, for every number and address: this is a launchpad, the
+ * numbers ARE the content, and columns of proportional digits are what make a data page look
+ * amateur.
+ *
+ * ## Rules
+ *
+ * One accent, spent on the thing being acted on. Borders are light-on-dark alphas so they hold
+ * at any surface depth. Radii are 14px for cards and 999px for controls — the family's rounding
+ * is generous and consistent, and mixing 4px and 14px is the fastest way to look generic.
+ * ═══════════════════════════════════════════════════════════════════════════════════════════ */
+
+/* Fonts are linked from index.html, not imported here — see the comment there. */
+
+:root {
+  /* ground — near-black with a blue bias, the family's note */
+  --bg:        #06070e;
+  --bg-2:      #090b14;
+  --panel:     #0d0f1a;
+  --panel-2:   #141827;
+  --panel-3:   #1b2032;
+
+  /* hairlines as alphas, so they hold on any surface */
+  --line:      rgba(255, 255, 255, .07);
+  --line-2:    rgba(255, 255, 255, .12);
+
+  --text:      #f2f4fb;
+  --dim:       #949cb4;
+  --dimmer:    #616a83;
+
+  /* the mark's two colours */
+  --accent:      #66d896;
+  --accent-2:    #8ce8b3;
+  --accent-ink:  #04140b;
+  --accent-dim:  rgba(102, 216, 150, .13);
+  --accent-line: rgba(102, 216, 150, .28);
+  --peri:        #e4e4fc;
+  --peri-dim:    rgba(228, 228, 252, .12);
+
+  --warn:      #f0b53f;
+  --warn-dim:  rgba(240, 181, 63, .13);
+  --danger:    #f0685a;
+
+  /* The type of ponscharity.family: Archivo for display, Inter Tight for the interface. */
+  --font:  "Inter Tight", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --display: "Archivo", "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+
+  --r-card: 14px;
+  --r-sm: 10px;
+  --shadow: 0 18px 44px rgba(0, 0, 0, .5);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+#root { min-height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: var(--accent); text-decoration: none; }
+h1, h2, h3 {
+  font-family: var(--display);
+  line-height: 1.08;
+  margin: 0;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+/* Every digit in this product lines up in a column somewhere. */
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+.num  { font-variant-numeric: tabular-nums; text-align: right; }
+.dim { color: var(--dim); }
+.flat { color: var(--dimmer); }
+.mark { color: var(--accent); }
+.warn { color: var(--warn); }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+
+/* ───────────────────────────────────────────────────────────────────── header */
+
+header.top {
+  position: sticky; top: 0; z-index: 30;
+  background: rgba(6, 7, 14, .72);
+  backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid var(--line);
+}
+header.top .wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 68px; gap: 18px;
+}
+.brand { display: flex; align-items: center; flex-shrink: 0; }
+.brand img { width: 34px; height: 34px; display: block; transition: transform .16s; }
+.brand:hover img { transform: scale(1.06); }
+.brand .host {
+  font-family: var(--mono); font-size: 11px; font-weight: 400;
+  color: var(--dimmer); letter-spacing: 0; align-self: center;
+}
+
+nav.tabs { display: flex; align-items: center; gap: 2px; }
+nav.tabs a {
+  color: var(--dim); font-size: 14.5px; font-weight: 500;
+  padding: 7px 14px; border-radius: 999px; transition: color .15s, background .15s;
+}
+nav.tabs a:hover { color: var(--text); }
+nav.tabs a.on { color: var(--text); background: rgba(255, 255, 255, .07); }
+
+/* ───────────────────────────────────────────────────────────────────── controls */
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--font); font-size: 14.5px; font-weight: 600;
+  padding: 10px 20px; border-radius: 999px;
+  background: var(--panel-2); color: var(--text);
+  border: 1px solid var(--line-2); cursor: pointer;
+  transition: background .15s, border-color .15s, transform .06s, opacity .15s;
+  white-space: nowrap;
+}
+.btn:hover { background: var(--panel-3); border-color: rgba(255, 255, 255, .2); }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: .42; cursor: not-allowed; transform: none; }
+.btn.primary {
+  background: var(--accent); color: var(--accent-ink); border-color: transparent;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .25) inset;
+}
+.btn.primary:hover:not(:disabled) { background: var(--accent-2); border-color: transparent; }
+a.btn { text-decoration: none; }
+a.btn:not(.primary) { color: var(--text); }
+a.brand { text-decoration: none; color: var(--text); }
+
+.walletmenu { position: relative; flex-shrink: 0; }
+.walletlist {
+  position: absolute; right: 0; top: calc(100% + 10px);
+  background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--r-card);
+  padding: 6px; min-width: 208px; box-shadow: var(--shadow); z-index: 40;
+}
+.walletlist button {
+  display: flex; align-items: center; width: 100%; background: none; border: 0;
+  color: var(--text); padding: 9px 11px; border-radius: var(--r-sm);
+  font-family: var(--font); font-size: 14px; cursor: pointer; text-align: left;
+}
+.walletlist button:hover { background: var(--panel-2); }
+/* The connected menu holds links as well as buttons: same shape, so a menu does not look like two
+ * different controls stacked. */
+.walletlist a {
+  display: flex; align-items: center; width: 100%;
+  color: var(--text); padding: 9px 11px; border-radius: var(--r-sm); font-size: 14px;
+}
+.walletlist a:hover { background: var(--panel-2); color: var(--text); }
+.walletlist button.danger { color: var(--dim); }
+.walletlist button.danger:hover { color: var(--warn); }
+/* A hairline over the last item, so "Disconnect" is visibly not one of the destinations. */
+.walletlist button.danger { margin-top: 4px; border-top: 1px solid var(--line); padding-top: 11px; border-radius: 0 0 var(--r-sm) var(--r-sm); }
+/* A refusal sits IN the menu, under the button that caused it — a wallet message in the footer is
+   a message nobody reads. */
+.walletwarn {
+  margin: 6px 5px 3px; font-size: 12.5px; line-height: 1.4; color: var(--warn); word-break: break-word;
+}
+
+.wallet-id { display: inline-flex; align-items: center; gap: 8px; }
+.wallet-id .caret { color: var(--dimmer); font-size: 11px; }
+/* Every wallet ships its own icon at its own size — measured at 108, 96, 30, 256 and 48px
+ * across the five installed here, so Jupiter's alone was taller than the viewport. */
+.walletlist button img {
+  width: 20px; height: 20px; object-fit: contain; margin-right: 10px;
+  border-radius: 5px; flex-shrink: 0;
+}
+.wallets { display: flex; align-items: center; gap: 10px; }
+
+/* ───────────────────────────────────────────────────────────────────── the hero
+ *
+ * The wordmark IS the hero. A launchpad's homepage has one job — say what this is and send you
+ * to the list — so the page opens with the name at a size that could not be mistaken for a
+ * heading, over a soft arc of brand light. The arc is two radial gradients rather than an image:
+ * nothing to load, and it scales to any viewport without a seam.
+ */
+.hero {
+  position: relative;
+  padding: 104px 0 66px;
+  text-align: center;
+  isolation: isolate;
+}
+.hero::before {
+  content: "";
+  position: absolute; inset: -180px -50vw 0;
+  z-index: -1;
+  background:
+    radial-gradient(760px 420px at 50% 6%, rgba(102, 216, 150, .14), transparent 70%),
+    radial-gradient(900px 520px at 18% 42%, rgba(228, 228, 252, .075), transparent 68%);
+  pointer-events: none;
+}
+/* The mark, at a size where its two forms actually read, with the light behind it rather than
+ * a drop shadow under it — it sits IN the field, not on top of one. */
+.lp-mark {
+  width: clamp(104px, 13.5vw, 162px); height: auto; display: block; margin: 0 auto;
+  filter: drop-shadow(0 0 46px rgba(102, 216, 150, .34)) drop-shadow(0 0 14px rgba(228, 228, 252, .18));
+}
+/* The name, under the mark. `--accent` IS the green sampled from the logo, so the word and the
+ * shape carry one colour rather than two that nearly match. */
+.lp-word {
+  margin: 22px 0 0;
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(34px, 5.2vw, 62px);
+  letter-spacing: -0.04em; line-height: 1;
+  color: #fff;
+}
+.lp-word-pump { color: var(--accent); }
+
+/* Two figures, a hairline between them. Big numeral in the display face, small letterspaced
+ * label under it — the same treatment the stat rows use everywhere else on the site, so the
+ * landing does not invent a second one. */
+.lp-stats {
+  display: flex; justify-content: center; align-items: stretch;
+  margin-top: 52px;
+}
+.lp-stats > div {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0 clamp(24px, 5vw, 56px);
+  border-right: 1px solid var(--line);
+}
+.lp-stats > div:last-child { border-right: 0; }
+.lp-stats strong {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(30px, 4.4vw, 46px); letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums; line-height: 1; color: #fff;
+}
+.lp-stats span {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--dimmer); margin-top: 11px; white-space: nowrap;
+}
+
+.hero h1, .lp-hero h1 {
+  font-size: clamp(21px, 2.5vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  margin: 26px auto 0;
+  /* Wide enough that the line breaks where the sentence does, not mid-clause. `balance` then
+     evens the two halves if a narrow viewport does need to wrap it. */
+  max-width: 34ch;
+}
+.hero .lede, .lp-hero .lede {
+  color: var(--dim); font-size: 16.5px; margin: 16px auto 0; max-width: 62ch;
+}
+.hero-cta { display: flex; gap: 12px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
+.hero-cta .btn { padding: 12px 26px; font-size: 15px; }
+
+/* ───────────────────────────────────────────────── stat rows
+ *
+ * Big figure, small letterspaced label under it, hairline between. Used on the homepage and
+ * again on a sale — one treatment for "here are the numbers", not two.
+ */
+.facts {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  border: 1px solid var(--line); border-radius: var(--r-card);
+  background: var(--panel); overflow: hidden;
+}
+.fact { padding: 20px 22px; border-right: 1px solid var(--line); }
+.fact:last-child { border-right: 0; }
+.fact .k {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--dimmer); margin-bottom: 8px;
+}
+.fact .v {
+  font-family: var(--display); font-size: 25px; font-weight: 600;
+  letter-spacing: -0.03em; font-variant-numeric: tabular-nums; line-height: 1.1;
+}
+
+.stats-inline { display: flex; gap: 34px; }
+.stats-inline div { display: flex; flex-direction: column; align-items: flex-end; }
+/* Under a centred title rather than opposite it: the figures centre as a group and each one
+   centres its own label, instead of every column hugging its right edge. */
+.stats-inline-center { justify-content: center; margin-top: 20px; flex-wrap: wrap; row-gap: 18px; }
+.stats-inline-center div { align-items: center; }
+.stats-inline strong {
+  font-family: var(--display); font-size: 28px; font-weight: 700;
+  letter-spacing: -0.035em; font-variant-numeric: tabular-nums; line-height: 1.05;
+}
+.stats-inline span {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--dimmer); margin-top: 5px; white-space: nowrap;
+}
+
+/* The front door's live numbers. Hairline separators rather than boxes: three figures do not
+ * need three containers, and the border-only treatment keeps the hero one uninterrupted field. */
+.hero-stats {
+  display: flex; justify-content: center; gap: 0; margin-top: 46px; flex-wrap: wrap;
+}
+.hero-stats div {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0 34px; border-right: 1px solid var(--line);
+}
+.hero-stats div:last-child { border-right: 0; }
+.hero-stats strong {
+  font-family: var(--display); font-size: 34px; font-weight: 700;
+  letter-spacing: -0.04em; font-variant-numeric: tabular-nums; line-height: 1;
+}
+.hero-stats span {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--dimmer); margin-top: 9px; white-space: nowrap;
+}
+
+/* Every route that is not the front door opens the same way: air, then a title. */
+.page { padding-top: 44px; }
+
+.rule { border: 0; border-top: 1px solid var(--line); margin: 56px 0; }
+
+/* ───────────────────────────────────────────────────────────────────── cards */
+
+.card, .sim {
+  border: 1px solid var(--line); border-radius: var(--r-card);
+  background: var(--panel);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .03) inset;
+}
+/* `.sim` gets its padding from `.sim-body`; a bare `.card` had none at all, so its text sat on
+ * the border. Only visible on the landing, which is the one place a bare card is used. */
+.card { padding: 22px; }
+.card h3 { margin-bottom: 9px; }
+.card p { color: var(--dim); font-size: 14.5px; margin: 0; }
+.sim-head {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 18px;
+  padding: 20px 24px; border-bottom: 1px solid var(--line); flex-wrap: wrap;
+}
+.sim-head h2 { font-size: 20px; font-weight: 600; }
+/* A head with nothing opposite it centres, rather than sitting left of empty space. */
+.sim-head.center { justify-content: center; text-align: center; }
+.sim-head p { color: var(--dim); font-size: 14px; margin: 5px 0 0; }
+.sim-body { padding: 22px 24px 24px; }
+.launch-cta { border-color: var(--accent-line); background:
+  linear-gradient(180deg, rgba(102, 216, 150, .07), transparent 60%), var(--panel); }
+
+.note {
+  color: var(--dim); font-size: 13.5px;
+  border-left: 2px solid var(--line-2); padding-left: 13px; margin: 12px 0 0;
+}
+/* A note that closes a card rather than annotating a line in it. The left rule is what makes the
+   default read as a margin note, so it goes: centred text needs no hanging indent to point at. */
+.note-center {
+  border-left: 0; padding-left: 0; text-align: center;
+  margin: 18px auto 0; max-width: 62ch;
+}
+/* An empty state is a place someone has ARRIVED at, not an error. Icon, what this is, one line
+ * about why it is empty, and the action that fills it — the same shape whether it is empty
+ * because nothing exists yet or because no wallet is connected. */
+.empty {
+  padding: 62px 28px; text-align: center; color: var(--dim);
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.empty .ico {
+  width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--accent-dim); color: var(--accent); margin-bottom: 14px;
+}
+.empty .ico svg { width: 21px; height: 21px; }
+.empty h3 { font-size: 17px; font-weight: 600; color: var(--text); }
+.empty p { margin: 0; max-width: 44ch; font-size: 14.5px; }
+.empty .btn { margin-top: 18px; }
+
+/* ───────────────────────────────────────────────────────────────────── forms */
+
+/* Two-up wherever there is room. A single column of full-width inputs reads as a questionnaire;
+ * pairing the ones that belong together (name/symbol, the caps) is what makes it a form. */
+.controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 4px 18px; margin-bottom: 22px; }
+.grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+.ctl { display: block; margin-bottom: 16px; }
+/* One control on its own row should be sized to itself — a lone select stretched across the card
+ * reads as a field that lost its pair. */
+.controls > .ctl:only-child { max-width: 340px; }
+.lbl {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 10px;
+  font-size: 13px; color: var(--dim); margin-bottom: 7px;
+}
+.lbl .val { font-family: var(--mono); color: var(--text); font-size: 13px; }
+.field {
+  width: 100%; background: var(--panel-2); color: var(--text);
+  border: 1px solid var(--line); border-radius: var(--r-sm);
+  padding: 11px 14px; font-family: var(--mono); font-size: 14.5px;
+  transition: border-color .15s, background .15s;
+}
+.field::placeholder { color: var(--dimmer); font-family: var(--font); }
+.field:focus { outline: none; border-color: var(--accent-line); background: var(--panel-3); }
+
+input[type=range] {
+  -webkit-appearance: none; appearance: none; width: 100%; height: 4px;
+  background: var(--panel-3); border-radius: 999px; outline: none;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 17px; height: 17px;
+  border-radius: 50%; background: var(--accent); cursor: pointer;
+  border: 3px solid var(--bg); box-shadow: 0 0 0 1px var(--accent-line);
+}
+input[type=range]::-moz-range-thumb {
+  width: 17px; height: 17px; border-radius: 50%; background: var(--accent);
+  cursor: pointer; border: 3px solid var(--bg);
+}
+input[type=file] { color: var(--dim); font-size: 13px; font-family: var(--font); }
+input[type=file]::file-selector-button {
+  font-family: var(--font); font-size: 13px; font-weight: 600;
+  background: var(--panel-2); color: var(--text);
+  border: 1px solid var(--line-2); border-radius: 999px;
+  padding: 7px 15px; margin-right: 12px; cursor: pointer;
+}
+
+/* ───────────────────────────────────────────────────────────────────── the launchpad */
+
+.explore { padding-top: 44px; }
+.explore-head { margin-bottom: 22px; }
+.explore-head h1 { font-size: clamp(26px, 3vw, 34px); font-weight: 700; }
+.explore-head p { color: var(--dim); margin: 8px 0 0; font-size: 15px; }
+/* Centred head, search and tabs — the same axis the home page's sections run on. `.lede` gets a
+ * measure so a centred paragraph breaks into even lines instead of one long one. */
+.explore-head.center { text-align: center; }
+.explore-head.center .eyebrow { justify-content: center; }
+.explore-head.center .eyebrow::before, .explore-head.center .eyebrow::after {
+  content: ''; height: 1px; flex: 1; max-width: 74px; background: var(--line-2);
+}
+.explore-head.center .lede { max-width: 56ch; margin-left: auto; margin-right: auto; }
+.explore-controls.center { justify-content: center; }
+/* `safe center` matters: the pill row scrolls horizontally on a phone, and a plain `center` on an
+ * overflowing flex row puts the first tab off the left edge where it cannot be scrolled back to. */
+.explore-tabs.center { justify-content: center; justify-content: safe center; }
+
+/* The search does not stretch. A field the width of the page reads as a form; a pill sized to
+ * its own job reads as a control, which is what the reference gets right. */
+.explore-controls { display: flex; align-items: center; margin-bottom: 14px; }
+.explore-tabs { margin-bottom: 18px; }
+/* A pill, and wide — search is the primary way into a list of hundreds of coins, so it should
+ * look like the main control on the page rather than a form field that happens to be here. */
+.search {
+  /* Sized to its job, not to the page. A field the full width of the viewport reads as a form. */
+  flex: 0 1 470px; min-width: 0; position: relative;
+  display: flex; align-items: center;
+}
+.search .field {
+  border-radius: 999px; padding: 12px 46px 12px 20px; font-family: var(--font);
+}
+.search .kbd {
+  position: absolute; right: 8px;
+  font-family: var(--mono); font-size: 11px; color: var(--dimmer);
+  background: var(--panel-3); border: 1px solid var(--line);
+  border-radius: 7px; padding: 3px 8px; pointer-events: none;
+}
+.tabs.pills { display: flex; gap: 6px; }
+.tabs.pills button {
+  font-family: var(--font); font-size: 13.5px; font-weight: 500;
+  background: none; border: 1px solid transparent; color: var(--dim);
+  padding: 8px 15px; border-radius: 999px; cursor: pointer;
+  transition: color .15s, background .15s;
+}
+.tabs.pills button:hover { color: var(--text); background: rgba(255, 255, 255, .04); }
+.tabs.pills button.on {
+  background: rgba(255, 255, 255, .09); color: var(--text); border-color: var(--line);
+}
+
+.tok-table {
+  border: 1px solid var(--line); border-radius: var(--r-card);
+  background: var(--panel); overflow: hidden;
+}
+.tok-row {
+  display: grid;
+  grid-template-columns: minmax(160px, 2.2fr) minmax(142px, 1.6fr) 112px 70px 100px 124px 84px;
+  gap: 16px; align-items: center; padding: 15px 20px;
+  border-bottom: 1px solid var(--line); color: var(--text); text-decoration: none;
+  transition: background .12s;
+}
+.tok-row:last-child { border-bottom: 0; }
+/* On hover a row lifts out of the table and becomes its own card. A background tint alone reads
+ * as "this cell is highlighted"; a border and a radius read as "this is one thing you can open". */
+.tok-row.tok-open {
+  position: relative;
+  border-radius: var(--r-card); border: 1px solid transparent;
+  border-bottom-color: var(--line);
+}
+.tok-row.tok-open:hover {
+  background: var(--panel-2); border-color: var(--line-2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .34);
+}
+.tok-row.tok-open:hover .tok-go,
+.tok-hit:focus-visible ~ .tok-go { opacity: 1; transform: none; }
+/* The ticker is the row's link, stretched over the whole row by a pseudo-element so the row still
+ * behaves like one target. It must stay UNDER the socials, which is what the z-index pair does. */
+.tok-hit { color: inherit; text-decoration: none; }
+.tok-hit::after { content: ""; position: absolute; inset: 0; border-radius: var(--r-card); z-index: 0; }
+.tok-open .socials { position: relative; z-index: 1; }
+.tok-go {
+  display: inline-block; margin-left: 7px; color: var(--accent); font-size: 12px;
+  opacity: 0; transform: translate(-3px, 2px); transition: opacity .13s, transform .13s;
+}
+.tok-row.head {
+  font-family: var(--mono); color: var(--dimmer); font-size: 10.5px;
+  text-transform: uppercase; letter-spacing: .13em;
+  background: transparent; padding-top: 13px; padding-bottom: 13px;
+}
+.tok-row.head:hover { background: transparent; }
+
+.tok-id { display: flex; align-items: center; gap: 13px; min-width: 0; }
+.tok-img {
+  width: 38px; height: 38px; border-radius: 50%; flex: none; object-fit: cover;
+  background: var(--panel-3); display: grid; place-items: center;
+  color: var(--dim); font-size: 15px; font-weight: 600;
+  border: 1px solid var(--line);
+}
+.tok-name { min-width: 0; display: flex; flex-direction: column; }
+.tok-name strong { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.tok-name span { color: var(--dim); font-size: 12.5px; }
+.tok-sub { display: inline-flex; align-items: center; min-width: 0; gap: 2px; }
+.tok-sub > :first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tok-desc { color: var(--dim); font-size: 14px; margin: 8px 0 0; max-width: 70ch; }
+
+.tok-raise { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.tok-bar {
+  height: 4px; border-radius: 999px; background: var(--panel-3); overflow: hidden;
+}
+.tok-bar i { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
+.tok-raise span { font-size: 12.5px; font-family: var(--mono); }
+.tok-cell { min-width: 0; font-size: 13.5px; }
+.tok-cell.num { padding-right: 2px; }
+.tok-spark { display: flex; align-items: center; }
+.tok-mcap { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+.tok-mcap strong { font-size: 14px; font-weight: 600; }
+.tok-mcap .up { font-size: 11px; color: var(--accent); }
+
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11.5px; font-weight: 600; padding: 4px 11px; border-radius: 999px;
+  border: 1px solid var(--line); color: var(--dim); white-space: nowrap;
+}
+.pill.live { color: var(--accent); border-color: var(--accent-line); background: var(--accent-dim); }
+.pill.live::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim);
+}
+.pill.warn { color: var(--warn); border-color: rgba(240, 181, 63, .3); background: var(--warn-dim); }
+.pill.done { color: var(--peri); border-color: var(--peri-dim); background: var(--peri-dim); }
+.pill.dead { color: var(--dimmer); }
+
+/* Coin links. Small and quiet — they sit beside the name, not competing with it. */
+.socials { display: inline-flex; gap: 5px; margin-left: 8px; vertical-align: baseline; }
+.socials a {
+  font-size: 9.5px; letter-spacing: .07em; font-family: var(--mono);
+  color: var(--dimmer); border: 1px solid var(--line); border-radius: 5px; padding: 1px 5px;
+}
+.socials a:hover { color: var(--text); border-color: var(--line-2); }
+
+.legend { display: flex; gap: 18px; flex-wrap: wrap; color: var(--dim); font-size: 13px; }
+.pos { color: var(--accent); }
+
+/* the simulator's queue table */
+table.q { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+table.q th {
+  text-align: right; font-family: var(--mono); font-size: 10.5px; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--dimmer);
+  padding: 0 12px 9px 0; border-bottom: 1px solid var(--line); white-space: nowrap;
+}
+table.q th:first-child, table.q td:first-child { text-align: left; }
+table.q td {
+  text-align: right; padding: 9px 12px 9px 0; border-bottom: 1px solid var(--line);
+  color: var(--dim); font-family: var(--mono); font-variant-numeric: tabular-nums;
+}
+table.q tr:last-child td { border-bottom: 0; }
+table.q tr.you td { color: var(--accent); }
+
+/* ───────────────────────────────────────────────────────────────────── the price chart */
+
+.chart {
+  border: 1px solid var(--line); border-radius: var(--r-card); background: var(--panel);
+  padding: 20px 20px 14px;
+}
+.chart-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  flex-wrap: wrap; margin-bottom: 10px;
+}
+.chart-label {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--dimmer);
+}
+.chart-now {
+  font-family: var(--display); font-size: 30px; font-weight: 700;
+  letter-spacing: -0.035em; margin-left: 12px; font-variant-numeric: tabular-nums;
+}
+.chart-mult { color: var(--accent); font-size: 13px; margin-left: 10px; }
+.chart-plot { width: 100%; }
+.chart-svg { width: 100%; height: auto; display: block; overflow: visible; }
+.chart-grid { stroke: var(--line); stroke-width: 1; }
+/* The opening price. Dashed and dim: a reference, not a reading. */
+.chart-open { stroke: var(--dimmer); stroke-width: 1; stroke-dasharray: 3 4; }
+.chart-line {
+  fill: none; stroke: var(--accent); stroke-width: 2;
+  stroke-linejoin: round; stroke-linecap: round;
+}
+.chart-dot { fill: var(--accent); stroke: var(--panel); stroke-width: 2; transition: r .08s; }
+.chart-cross { stroke: var(--dimmer); stroke-width: 1; stroke-dasharray: 2 3; }
+.chart-tick { fill: var(--dimmer); font-size: 11px; font-family: var(--mono); }
+.chart-note { color: var(--dim); font-size: 13px; margin: 12px 0 0; min-height: 2.6em; }
+
+.chart-table { margin-top: 14px; }
+.chart-table summary { color: var(--dim); font-size: 13px; cursor: pointer; }
+.chart-table summary:hover { color: var(--text); }
+.chart-table-scroll { overflow-x: auto; margin-top: 12px; }
+.chart-table table {
+  border-collapse: collapse; width: 100%; font-size: 13px; white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.chart-table th {
+  text-align: right; color: var(--dimmer); font-weight: 500; padding: 6px 12px;
+  border-bottom: 1px solid var(--line); font-size: 10.5px;
+  letter-spacing: .12em; text-transform: uppercase;
+}
+.chart-table th:first-child, .chart-table td:first-child { text-align: left; }
+.chart-table td {
+  text-align: right; padding: 6px 12px; border-bottom: 1px solid var(--line); color: var(--dim);
+}
+.chart-table tbody tr:last-child td { border-bottom: 0; }
+
+/* the listing's sparkline */
+.spark { display: inline-flex; align-items: center; gap: 8px; }
+.spark svg { display: block; }
+.spark-line {
+  fill: none; stroke: var(--accent); stroke-width: 1.5;
+  stroke-linejoin: round; stroke-linecap: round;
+}
+.spark-mult { color: var(--dim); font-size: 12px; }
+
+/* ───────────────────────────────────────────────────────────────────── narrow screens
+ *
+ * Measured, never eyeballed. Page overflow and grid overflow are both held at 0 from 390px to
+ * 1600px; the breakpoints below are where they would otherwise stop being 0.
+ */
+
+/* The header breaks BEFORE the listing does, and by a different amount: the brand, five nav
+ * items and the wallet button need 763px. Adding a nav item is not free. */
+@media (max-width: 800px) {
+  header.top .wrap { height: auto; flex-wrap: wrap; row-gap: 6px; padding-top: 11px; padding-bottom: 11px; }
+  header.top .brand { order: 1; }
+  header.top .walletmenu { order: 2; margin-left: auto; }
+  header.top nav.tabs {
+    order: 3; width: 100%; overflow-x: auto; gap: 4px;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  header.top nav.tabs::-webkit-scrollbar { display: none; }
+  header.top nav.tabs a { white-space: nowrap; }
+  .brand .host { display: none; }
+}
+
+/* Seven columns need more room than the wrap gives between the mobile layout and full width.
+ * The price column is the one that goes: the raise bar and the countdown still tell the story,
+ * where a clipped "Updated" tells none. */
+@media (min-width: 861px) and (max-width: 1080px) {
+  .tok-row { grid-template-columns: minmax(160px, 2.2fr) minmax(142px, 1.6fr) 70px 100px 124px 84px; }
+  .tok-row > :nth-child(3) { display: none; }
+}
+
+@media (max-width: 860px) {
+  .wrap { padding: 0 20px; }
+  .tok-row { grid-template-columns: minmax(140px, 2fr) minmax(110px, 1.4fr) 116px 118px; }
+  .tok-row > :nth-child(4), .tok-row > :nth-child(5), .tok-row > :nth-child(7) { display: none; }
+  .explore-head { align-items: flex-start; }
+  .stats-inline { gap: 22px; }
+  .stats-inline div { align-items: flex-start; }
+  .hero { padding: 66px 0 48px; }
+}
+
+@media (max-width: 720px) {
+  .wrap { padding: 0 16px; }
+
+  .explore { padding-top: 28px; }
+  .explore-controls { gap: 10px; }
+  .tabs.pills { overflow-x: auto; scrollbar-width: none; }
+  .tabs.pills::-webkit-scrollbar { display: none; }
+  .tabs.pills button { white-space: nowrap; }
+
+  /* Two columns: who it is, and how it is doing. The countdown and status move under the raise,
+     which is where they read anyway once the row is this narrow. Every visible cell is placed
+     EXPLICITLY — leaving one to auto-placement while the status below it is positioned put the
+     raise column ahead of the token column, and the rows then disagreed with the header. */
+  .tok-row { grid-template-columns: minmax(0, 1fr) minmax(104px, 140px); gap: 8px 12px; padding: 13px 14px; }
+  .tok-row > :nth-child(3), .tok-row > :nth-child(4), .tok-row > :nth-child(5),
+  .tok-row > :nth-child(7) { display: none; }
+  .tok-row.head > :nth-child(6) { display: none; }
+  .tok-id   { grid-column: 1; grid-row: 1; }
+  .tok-raise { grid-column: 2; grid-row: 1; }
+  .tok-row > :nth-child(6) { grid-column: 2; grid-row: 2; justify-self: end; }
+  .tok-img { width: 34px; height: 34px; }
+  .tok-name strong { font-size: 14px; }
+
+  .fact { padding: 16px 18px; }
+  .fact .v { font-size: 21px; }
+  .sim-head, .sim-body { padding-left: 18px; padding-right: 18px; }
+  .chart { padding: 16px 14px 12px; }
+  .chart-now { font-size: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════ the landing
+ *
+ * Built as a front door, not a document. Each panel below the hero is a stage holding something
+ * REAL — the coins that are open right now, and the same chart component the sale page draws —
+ * with one short line under it. A landing that demos a launchpad with invented data has to be
+ * maintained separately and drifts away from the product; this one cannot.
+ *
+ * The atmosphere is the mark's own two colours blurred into a field, rather than stock artwork:
+ * the brand already owns a green and a periwinkle, and a photograph would own the page instead.
+ */
+.landing { padding-bottom: 0; }
+/* The landing owns its own measure: the hero is full width, everything under it is not. */
+main.bleed { max-width: none; padding: 0; }
+main.bleed .landing > :not(.lp-hero) { max-width: 1120px; margin: 0 auto; padding-left: 28px; padding-right: 28px; }
+
+/* Full bleed, and tall enough to be a place rather than a banner. The header floats over it,
+ * so the canvas runs under the top of the viewport and the scrim inside the art fades the ground
+ * in behind the nav. */
+.lp-hero {
+  position: relative;
+  min-height: 100svh;
+  padding: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  isolation: isolate;
+}
+.sky {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  z-index: -1; display: block;
+}
+.lp-hero-inner { position: relative; z-index: 1; padding: 0 24px; }
+
+/* A quiet cue that there is more, rather than a bouncing arrow. */
+.lp-scrollcue {
+  position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 46px; background: linear-gradient(var(--line-2), transparent);
+  overflow: hidden;
+}
+.lp-scrollcue span {
+  display: block; width: 1px; height: 14px; background: var(--accent);
+  animation: cue 2.6s ease-in-out infinite;
+}
+@keyframes cue { 0% { transform: translateY(-16px); opacity: 0 }
+                 35% { opacity: 1 } 100% { transform: translateY(46px); opacity: 0 } }
+@media (prefers-reduced-motion: reduce) { .lp-scrollcue span { animation: none; opacity: .5 } }
+
+/* The paragraph that used to crowd the hero, given room to be read. */
+.lp-lede-panel { max-width: 62ch; margin: 96px auto 0; text-align: center; }
+.lp-lede-panel .lede {
+  color: var(--text); font-size: 20px; line-height: 1.62; margin: 0;
+  font-family: var(--display); font-weight: 500; letter-spacing: -0.018em;
+}
+
+.lp-enter {
+  padding: 14px 34px; font-size: 15px; font-weight: 600; letter-spacing: .01em;
+  box-shadow: 0 1px 0 rgba(255,255,255,.28) inset, 0 12px 34px rgba(102, 216, 150, .22);
+}
+.hero-cta { margin-top: 34px; }
+
+/* ── the editorial grid ────────────────────────────────────────────────────────────────────
+ *
+ * A label column and a body column. The numbers are not ornament: this is a sequence a reader
+ * moves through in order — what the window is, what is open, what a price does, why that is
+ * fair — and the column makes that order visible without a single extra word.
+ *
+ * Everything centred in equal cards is the shape a page takes when nobody decided on one.
+ */
+.ed {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 48px;
+  padding: 84px 0;
+  border-top: 1px solid var(--line);
+}
+.ed:first-of-type { border-top: 0; }
+.ed-label { position: sticky; top: 108px; align-self: start; }
+.ed-label span {
+  display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+  color: var(--accent); margin-bottom: 12px;
+}
+.ed-label p {
+  margin: 0; font-family: var(--display); font-size: 17px; font-weight: 600;
+  letter-spacing: -0.02em; color: var(--dim); line-height: 1.25;
+}
+
+/* The one long paragraph on the site, set as the statement it is rather than as body copy. */
+.ed-statement {
+  margin: 0; font-family: var(--display); font-weight: 500;
+  font-size: clamp(23px, 2.6vw, 33px); line-height: 1.34; letter-spacing: -0.028em;
+  color: var(--text); max-width: 24ch; text-wrap: pretty;
+}
+.ed-statement { max-width: 30ch; }
+
+.ed-more {
+  display: inline-block; margin-top: 22px; font-size: 14.5px; font-weight: 600;
+  color: var(--accent);
+}
+.ed-more:hover { color: var(--accent-2); }
+
+.ed-reasons { display: grid; gap: 40px; }
+.ed-reasons > div { max-width: 62ch; }
+.ed-reasons h3 {
+  font-size: 19px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.022em;
+}
+.ed-reasons p { margin: 0; color: var(--dim); font-size: 16px; line-height: 1.62; }
+
+/* Three, so the row is always a row. auto-fill with four items wrapped 3+1, which reads
+ * as a mistake rather than as a grid. */
+.lp-coins { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+.lp-stage {
+  border: 1px solid var(--line); border-radius: 18px; background: var(--panel);
+  padding: 22px; box-shadow: 0 1px 0 rgba(255, 255, 255, .03) inset;
+}
+.lp-stage .chart { border: 0; background: none; padding: 0; box-shadow: none; }
+
+.coin-card {
+  display: block; border: 1px solid var(--line); border-radius: var(--r-card);
+  background: var(--bg-2); padding: 15px; color: var(--text);
+  transition: border-color .14s, background .14s, transform .14s;
+}
+.coin-card:hover { border-color: var(--accent-line); background: var(--panel-2); transform: translateY(-3px); }
+.coin-card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.coin-card-id { min-width: 0; flex: 1; display: flex; flex-direction: column; }
+.coin-card-id strong { font-size: 15px; font-weight: 600; }
+.coin-card-id span {
+  color: var(--dim); font-size: 12.5px; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap;
+}
+.coin-card-rows { display: flex; flex-direction: column; gap: 6px; margin-bottom: 13px; }
+.coin-card-rows div { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.coin-card-rows span { color: var(--dim); font-size: 12.5px; }
+.coin-card-rows b { font-size: 13px; font-weight: 500; }
+
+.lp-foot {
+  padding: 70px 0 20px; border-top: 1px solid var(--line);
+  display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center;
+}
+.lp-foot img { opacity: .8; }
+.lp-foot p { color: var(--dimmer); font-size: 13px; margin: 0; }
+
+@media (max-width: 860px) {
+  /* The label stops being a column and becomes a heading above its section. */
+  .ed { grid-template-columns: minmax(0, 1fr); gap: 20px; padding: 56px 0; }
+  .ed-label { position: static; display: flex; align-items: baseline; gap: 12px; }
+  .ed-label span { margin-bottom: 0; }
+  .ed-statement { max-width: none; }
+  .lp-stage { padding: 15px; }
+}
+
+/* ── two columns: work, then context ───────────────────────────────────────────────────────
+ *
+ * The launch form had nothing beside it, so there was no sense of what was being made until it
+ * already existed. The sidebar is a preview and a sequence, both built from the form's own
+ * state, so it cannot describe something the fields have not been given.
+ */
+.two-col {
+  display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 22px; align-items: start;
+}
+.col-main { min-width: 0; }
+.col-side { display: flex; flex-direction: column; gap: 16px; position: sticky; top: 92px; }
+.side-card {
+  border: 1px solid var(--line); border-radius: var(--r-card); background: var(--panel);
+  padding: 16px 18px;
+}
+.side-label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--accent);
+}
+.side-note {
+  color: var(--dim); font-size: 13px; margin: 12px 0 0; font-style: italic;
+  border-top: 1px solid var(--line); padding-top: 12px;
+}
+.side-steps {
+  margin: 14px 0 0; padding: 0; list-style: none; counter-reset: st;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.side-steps li {
+  counter-increment: st; display: grid; grid-template-columns: 20px 1fr; gap: 10px;
+  color: var(--dim); font-size: 13.5px; line-height: 1.5; margin: 0;
+}
+.side-steps li::before {
+  content: counter(st, decimal-leading-zero);
+  font-family: var(--mono); font-size: 10.5px; color: var(--dimmer); padding-top: 3px;
+}
+
+.explore-head-split {
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  /* The preview stops being a sidebar and goes above the form, where it is still the first
+     thing you see rather than something below a long scroll. */
+  .two-col { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  /* The form comes first on a narrow screen; the preview and the steps follow it. */
+  .col-side { position: static; order: 2; }
+}
+
+/* Seven columns of tabular numbers have a floor width, so the queue table scrolls inside its own
+ * box rather than pushing the page sideways. Measured at 390px: 54px of page overflow without it. */
+.q-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.q-scroll table.q { min-width: 460px; }
+
+/* The app's footer line. It had no rule at all, so it sat flush against whatever card ended the page. */
+main.wrap > footer {
+  margin-top: 48px;
+  padding: 22px 0 40px;
+  border-top: 1px solid var(--line);
+  color: var(--dimmer);
+  font-size: 13px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════════════════════
+ * The ponscharity.family layer — 16 Sep 2026.
+ *
+ * The operator asked for the site to look and feel like ponscharity.family while keeping this dark
+ * ground and the mark's colours. What carries over is the STRUCTURE of that site, not its bone
+ * paper: a three-column header with the mark in a round tile and a segmented nav, a centred hero
+ * with a large mark and a tightly tracked headline, a stat strip ruled by hairlines, letterspaced
+ * eyebrows with rules on both sides, numbered steps under a heavy rule, image-topped cards, and a
+ * column footer. Where that site uses ink on paper, this uses the green on near-black.
+ * ═══════════════════════════════════════════════════════════════════════════════════════════ */
+
+h1 { font-size: clamp(2.5rem, 5vw, 4.2rem); font-weight: 700; line-height: 1; letter-spacing: -0.035em; }
+h2 { font-size: clamp(2rem, 3.8vw, 3.2rem); font-weight: 700; line-height: 1.02; letter-spacing: -0.032em; }
+h3 { font-weight: 700; letter-spacing: -0.015em; }
+
+.btn { min-height: 44px; font-size: 14px; letter-spacing: 0.01em; }
+.btn.lg { padding: 14px 28px; font-size: 15px; min-height: 52px; }
+
+/* ── header ── */
+.hdr {
+  position: sticky; top: 0; z-index: 30;
+  background: rgba(6, 7, 14, .82);
+  backdrop-filter: blur(14px) saturate(1.1);
+  border-bottom: 1px solid var(--line);
+}
+/* Three columns with equal outer tracks, so the nav is centred on the page and does not drift as
+   the wallet button changes width. */
+.hdr-in {
+  max-width: 1240px; margin: 0 auto; padding: 0 28px; height: 72px;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 18px;
+}
+/* X, GitHub, then the wallet. ⚠ `align-items: center` matters: the wallet control changes height
+   between its states ("Connect wallet", "Connecting to Phantom…", the address pill) and without it
+   the two circles jump with it. */
+.hdr-right { display: flex; justify-content: flex-end; align-items: center; gap: 8px; }
+/* Smaller in the header than they were in the footer: they sit beside a primary button and must
+   not compete with it. */
+.hdr-right .pf-x { width: 34px; height: 34px; }
+.pf-brand { display: inline-flex; align-items: center; gap: 11px; color: var(--text); min-height: 44px; }
+.pf-tile {
+  width: 40px; height: 40px; border-radius: 50%; flex: none;
+  display: grid; place-items: center;
+  background: var(--panel-2); border: 1px solid var(--line-2);
+}
+.pf-tile img { width: 26px; height: 26px; display: block; }
+.pf-name { font-family: var(--display); font-weight: 700; font-size: 1.16rem; letter-spacing: -0.03em; white-space: nowrap; }
+
+.seg {
+  display: inline-flex; align-items: center; gap: 2px; padding: 4px;
+  border-radius: 999px; background: var(--bg-2); border: 1px solid var(--line);
+}
+.seg a {
+  padding: 8px 18px; border-radius: 999px; border: 1px solid transparent;
+  font-size: 0.84rem; font-weight: 500; color: var(--dim); white-space: nowrap;
+  transition: color .16s, background .16s, border-color .16s;
+}
+.seg a:hover { color: var(--text); }
+.seg a.on { color: var(--text); font-weight: 600; background: var(--panel-2); border-color: var(--line-2); }
+
+/* ── eyebrow and section heads ── */
+.eyebrow {
+  font-family: var(--font); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--dimmer); margin: 0 0 1.1rem;
+  display: flex; align-items: center; gap: 14px;
+}
+.eyebrow::after { content: ''; height: 1px; flex: 1; background: linear-gradient(90deg, var(--line-2), transparent); }
+.pf-head { margin-bottom: 40px; max-width: 760px; }
+.pf-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+.pf-head.center .eyebrow { justify-content: center; }
+.pf-head.center .eyebrow::before, .pf-head.center .eyebrow::after { content: ''; height: 1px; flex: 1; max-width: 74px; background: var(--line-2); }
+.pf-head.split { max-width: none; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
+
+/* ── hero ── */
+main.bleed { display: block; }
+.pf-hero {
+  padding: 56px 0 44px; text-align: center; position: relative; overflow: hidden;
+  /* A soft glow behind the mark, as an ellipse on the section itself. It used to be a clipped
+     pseudo-element, which showed as a visible vertical band on narrow screens. */
+  background: radial-gradient(ellipse 560px 340px at 50% 22%, rgba(102, 216, 150, .09), transparent 70%);
+}
+.pf-hero .wrap { position: relative; }
+.pf-hero-mark { width: min(200px, 44vw); height: auto; display: block; margin: 0 auto 26px; }
+.pf-hero h1 { margin: 0 auto 14px; }
+.pf-lede { font-size: clamp(1.05rem, 1.6vw, 1.3rem); color: var(--dim); margin: 0 auto 30px; max-width: 34ch; text-wrap: balance; }
+.pf-cta { display: flex; gap: 11px; justify-content: center; flex-wrap: wrap; }
+
+.pf-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); margin: 52px auto 0; max-width: 980px;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+/* A single figure keeps the hairline strip the rest of the site speaks in, but sized to itself —
+ * one cell stretched across 980px reads as two cells that failed to load. */
+.pf-stats.one { grid-template-columns: 1fr; max-width: 260px; margin-top: 46px; }
+.pf-stats.one > div { padding: 22px 20px; }
+.pf-stats > div { padding: 26px 20px; text-align: center; }
+.pf-stats > div + div { border-left: 1px solid var(--line); }
+.pf-stats span { display: block; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dimmer); margin-bottom: 12px; }
+.pf-stats b { font-family: var(--display); font-weight: 700; font-size: 1.95rem; line-height: 1; letter-spacing: -0.03em; }
+.pf-stats small { font-size: 0.88rem; color: var(--dim); margin-left: 4px; font-weight: 600; }
+
+/* ── sections and steps ── */
+.pf-section { padding: 84px 0; }
+.pf-section.alt { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.steps { border-top: 1px solid var(--text); }
+.step {
+  display: grid; grid-template-columns: 62px minmax(0, 300px) minmax(0, 1fr); gap: 28px;
+  align-items: start; padding: 30px 4px; border-bottom: 1px solid var(--line);
+}
+.step-n { font-family: var(--mono); font-size: 0.8rem; color: var(--dimmer); padding-top: 3px; letter-spacing: 0.04em; }
+.step h3 { font-size: 1.12rem; margin: 0; }
+.step p { font-size: 0.95rem; color: var(--dim); margin: 0; max-width: 62ch; }
+
+/* ── the How it works page ──
+ * Prose, in the site's own shapes: the numbered `.step` rows the home page uses, a quiet band for
+ * the claim the product turns on, and four cards for the summary. Its own rules are only about
+ * rhythm — nothing here restyles `.step`, which two pages share. */
+.how-hero { margin-bottom: 30px; }
+/* ⛔ No font-size of its own. It used to run to 62px, a size no other page's title reaches, so
+   How it works read as a different site. It now takes `.page .pf-head h1` like every other. */
+.how-hero h1 { letter-spacing: -0.03em; }
+/* The intro is one centred column. The statement gets a wide measure and balanced lines — the
+   default 30ch is for a statement sitting BESIDE something, not for one carrying a page. */
+.how-intro { max-width: 780px; margin: 0 auto 8px; text-align: center; }
+.how-intro .ed-statement {
+  max-width: 34ch; margin: 0 auto 24px; text-wrap: balance;
+  font-size: clamp(25px, 3vw, 36px); line-height: 1.28;
+}
+.how-lede {
+  font-size: 1.04rem; line-height: 1.72; color: var(--dim);
+  max-width: 66ch; margin: 0 auto 16px; text-wrap: pretty;
+}
+.how-steps { margin: 52px 0 0; }
+.step-body { display: grid; gap: 10px; }
+/* The page's last word, so it sits on the same centred axis as its first — left-aligned in a
+   full-width panel it trailed off into empty space on the right. */
+.how-band {
+  margin: 54px auto 0; padding: 40px 32px; max-width: 880px; text-align: center;
+  border-radius: var(--r-card); background: var(--panel); border: 1px solid var(--line-2);
+}
+.how-band h2 { margin: 0 0 18px; font-size: clamp(22px, 2.4vw, 30px); letter-spacing: -0.02em; }
+.how-band p { margin: 0 auto 12px; color: var(--dim); max-width: 60ch; line-height: 1.65; text-wrap: pretty; }
+.how-band p:last-child { margin-bottom: 0; }
+@media (max-width: 520px) { .how-band { padding: 26px 20px; margin: 40px 0; } }
+
+/* ── launch cards ── */
+.lc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+.lc {
+  display: flex; flex-direction: column; overflow: hidden; color: var(--text);
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-card);
+  transition: border-color .16s, transform .16s;
+}
+.lc:hover { border-color: var(--accent-line); transform: translateY(-2px); }
+.lc-img { aspect-ratio: 16 / 11; position: relative; display: grid; place-items: center; background: var(--panel-2); overflow: hidden; }
+.lc-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.lc-mono { font-family: var(--display); font-weight: 700; font-size: 2rem; color: var(--dimmer); }
+.lc-body { padding: 15px 15px 16px; display: flex; flex-direction: column; gap: 4px; }
+.lc-tick { font-size: 0.78rem; color: var(--dim); }
+.lc-name { font-family: var(--display); font-size: 1.05rem; letter-spacing: -0.015em; }
+.lc-fig { display: flex; align-items: baseline; gap: 7px; margin: 8px 0 8px; }
+.lc-fig b { font-family: var(--display); font-size: 1.3rem; letter-spacing: -0.02em; }
+.lc-fig span, .lc-k { font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dimmer); }
+.lc-foot { display: flex; align-items: center; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+.lc-left { margin-left: auto; font-size: 0.76rem; color: var(--dim); }
+.pf-more { display: flex; justify-content: center; margin-top: 30px; }
+
+/* ── page heads inside the app ── */
+.explore-head h1, .page .pf-head h1 { font-size: clamp(2.1rem, 3.8vw, 3.2rem); }
+
+/* ── footer ── */
+.pf-footer { border-top: 1px solid var(--line); background: var(--bg-2); padding: 44px 0 30px; margin-top: 80px; }
+main.bleed + .pf-footer { margin-top: 0; }
+/* Centred: the mark, and one way out to X. Sized off the brand tile so the two read as a pair
+ * rather than a button parked beside a logo. */
+/* The mark, plus X and GitHub on a phone only — see `.footer-social` in the 560 block. */
+.pf-footer-center { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
+/* ⛔ `display: none`, not `contents`: an empty inline element still takes the flex gap, which
+   would push the centred mark off the axis by half a gap on every desktop page. */
+.footer-social { display: none; }
+/* ⚠ `.pf-x` is now the shape for every round footer link, not just X — the GitHub one sits
+   beside it and must be the same circle, or the pair reads as two different controls. */
+.pf-x {
+  width: 40px; height: 40px; border-radius: 50%; flex: none;
+  display: grid; place-items: center;
+  color: var(--dim); background: var(--panel-2); border: 1px solid var(--line-2);
+  transition: color .16s, border-color .16s, transform .16s;
+}
+.pf-x:hover { color: var(--text); border-color: var(--accent-line); transform: translateY(-1px); }
+.pf-footer-warn { color: var(--warn); font-size: 0.9rem; margin: 18px 0 0; width: 100%; text-align: center; }
+
+/* ── the platform's own token, on the front page ───────────────────────────────────────────────
+ *
+ * One quiet line under the hero's buttons rather than a card: it is a fact about the site, not a
+ * call to action competing with Launch a token. */
+.fam-strip {
+  display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center;
+  margin: 26px auto 0; padding: 8px 8px 8px 10px;
+  background: var(--panel-2); border: 1px solid var(--line-2); border-radius: 999px;
+}
+.fam-mark { border-radius: 50%; display: block; }
+/* The whole address, and the whole address is the button. Shared by the front-page strip, the
+   token page and a launched sale. */
+.ca-btn {
+  position: relative; background: none; border: 0; cursor: pointer; color: var(--dim);
+  font-size: 13px; letter-spacing: 0; padding: 6px 4px; min-height: 34px;
+  /* ⛔ A mint is 44 characters. It must be allowed to break rather than widen its container past
+     the viewport — a horizontal scrollbar is worse than two short lines. */
+  word-break: break-all; text-align: center; line-height: 1.35;
+}
+.ca-btn:hover, .ca-btn:focus-visible { color: var(--text); }
+/* ⚠ Absolutely positioned so the confirmation cannot reflow the address while it is being read,
+   and `pointer-events: none` so it can never eat the click that produced it. */
+.ca-copied {
+  position: absolute; left: 50%; bottom: -18px; transform: translateX(-50%);
+  font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent);
+  opacity: 0; transition: opacity .16s; pointer-events: none; white-space: nowrap;
+}
+.ca-copied.on { opacity: 1; }
+/* In the hero strip it sits inline beside the mark, so it aligns left rather than centring. */
+.fam-ca-btn { text-align: left; }
+/* ⚠ `white-space: nowrap` on both halves: "Our token" broke across two lines inside the figure
+   row, which reads as a layout accident rather than a label. */
+/* The card's one figure. It replaced a raise number, a progress bar, a status pill, a countdown
+   and a buy prompt — five things competing in a tile the size of a stamp. */
+.lc-cap { margin-top: 12px; display: flex; align-items: baseline; gap: 7px; }
+.lc-cap b {
+  font-family: var(--display); font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+/* ⚠ Set like pump.fun's own grid: the label is a quiet suffix to the figure, not a caption
+   under it — at 9.5px with wide tracking it read as a heading for something. */
+.lc-cap span {
+  font-size: 13px; letter-spacing: 0; text-transform: none;
+  color: var(--dimmer); white-space: nowrap;
+}
+.fam-soon {
+  font-size: 12px; color: var(--dimmer); letter-spacing: .04em;
+  border: 1px dashed var(--line-2); border-radius: 999px; padding: 5px 12px;
+}
+@media (max-width: 560px) {
+  .fam-strip { border-radius: 18px; padding: 12px 14px; }
+  /* Smaller so 44 characters still fit two lines rather than four on a narrow phone. */
+  .ca-btn { font-size: 11.5px; min-height: 40px; }
+}
+
+/* ── the platform's own token page ──────────────────────────────────────────────────────────── */
+.tok-page { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 34px 20px 30px; }
+.tok-page-h { font-size: clamp(2rem, 5vw, 2.8rem); margin: 16px 0 2px; letter-spacing: -0.02em; }
+/* The NAME, under the ticker. ⚠ Not monospaced any more: it is prose, and setting it in the mono
+   face made a two-word name read as a second symbol. */
+.tok-page-sub { color: var(--dim); font-size: 17px; margin: 2px 0 0; letter-spacing: -0.005em; }
+.tok-page-note { color: var(--dimmer); font-size: 13.5px; margin: 14px auto 0; max-width: 46ch; line-height: 1.55; }
+.tok-page-cap { margin: 22px 0 0; font-size: 15px; }
+.tok-page-cap strong { font-size: 30px; letter-spacing: -0.02em; }
+/* The card that closes a launched sale: what happened, where the fees go, and the two places to
+   go next — all on the page's axis. */
+.launched-card { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 30px 20px 28px; }
+.launched-card h2 { margin: 0; font-size: 1.35rem; letter-spacing: -0.015em; }
+/* ⚠ No left rule: a centred line with a hanging border reads as a quote that lost its author. */
+.launched-fees { color: var(--dim); font-size: 14px; margin: 12px 0 0; }
+.launched-fees strong { color: var(--text); font-weight: 600; }
+.launched-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 22px; }
+
+/* The sale page's window line, under the identity rather than opposite it. */
+.tok-page-window { margin: 18px 0 0; font-size: 15px; color: var(--text); }
+.tok-page-window .flat { font-size: 12px; }
+/* The phase pill and any socials sit on the page's axis with everything else. */
+.tok-page .pill { vertical-align: middle; }
+/* ⚠ The sale page's own address pill, matching the token page's. Both are `.tok-page`, so this
+   is one rule rather than two that drift. */
+
+/* On the token page the address is a pill the eye lands on, rather than a line of grey text. */
+.tok-page .ca-btn {
+  margin-top: 20px; background: var(--panel-2); border: 1px solid var(--line-2);
+  border-radius: 999px; padding: 10px 18px; max-width: 100%;
+}
+
+/* The featured token's address where a raise bar would be. Truncated by the same rule as any
+   other address on the page, and titled so the full value is one hover away. */
+.tok-ca { font-size: 12.5px; color: var(--dim); }
+
+/* Your position, when there is none. A heading over one short left-aligned line read as an empty
+   shelf; centred with room around it, it reads as an answer. */
+.position-empty {
+  text-align: center; margin: 0; padding: 26px 16px; color: var(--dim);
+}
+
+/* Short nav labels exist only for phones. */
+.seg .short { display: none; }
+
+/* ── tablet: the header drops the nav to its own full-width row ── */
+@media (max-width: 900px) {
+  .hdr-in { grid-template-columns: 1fr auto; height: auto; padding-top: 10px; padding-bottom: 10px; row-gap: 10px; }
+  .seg { grid-column: 1 / -1; grid-row: 2; justify-self: stretch; justify-content: space-between; }
+  .seg a { flex: 1; text-align: center; padding: 8px 10px; }
+  .step { grid-template-columns: 44px minmax(0, 1fr); gap: 8px 16px; }
+  .step p { grid-column: 2; }
+  .pf-section { padding: 64px 0; }
+  .pf-hero { padding: 40px 0 36px; }
+}
+
+/* ── phone ── */
+@media (max-width: 560px) {
+  .wrap, .hdr-in { padding-left: 16px; padding-right: 16px; }
+  .pf-name { font-size: 1rem; }
+  .pf-tile { width: 36px; height: 36px; }
+  .seg a { padding: 7px 4px; font-size: 0.8rem; }
+  .seg .long { display: none; }
+  .seg .short { display: inline; }
+  /* ⛔ The brand, the wallet button and two circles do not fit one phone row — and the wallet is
+     the one that has to stay. X and GitHub drop out of the HEADER here and the footer copy takes
+     over, so a phone still has both. */
+  .hdr-right .pf-x { display: none; }
+  .footer-social { display: contents; }
+  /* ⚠ A bigger tap target than the header's 34px: a thumb is not a cursor. */
+  .footer-social .pf-x { width: 44px; height: 44px; }
+  .pf-hero-mark { width: 150px; margin-bottom: 18px; }
+  .pf-cta .btn.lg { padding: 12px 20px; min-height: 48px; font-size: 14px; }
+  .pf-stats { margin-top: 36px; }
+  .pf-stats > div { padding: 18px 6px; }
+  .pf-stats span { font-size: 0.6rem; letter-spacing: 0.12em; margin-bottom: 8px; }
+  .pf-stats b { font-size: 1.35rem; }
+  .pf-stats small { display: block; margin: 4px 0 0; font-size: 0.7rem; }
+  .pf-section { padding: 52px 0; }
+  .pf-head { margin-bottom: 26px; }
+  .step { grid-template-columns: 30px minmax(0, 1fr); padding: 22px 0; }
+  .lc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .lc-img { aspect-ratio: 4 / 3; }
+  .lc-mono { font-size: 1.4rem; }
+  .lc-body { padding: 11px 11px 12px; }
+  .lc-fig b { font-size: 1.05rem; }
+  .lc-fig span { font-size: 0.56rem; }
+  .lc-foot { flex-wrap: wrap; gap: 6px; }
+  .lc-foot .lc-k { display: none; }
+  .lc-left { margin-left: 0; }
+  .pf-footer { padding: 34px 0 26px; }
+}
+
+/* ── Buy with FOMO ── */
+.buy-cta { border-color: var(--accent-line); background: linear-gradient(180deg, rgba(102, 216, 150, .07), transparent 70%), var(--panel); }
+.buy-cta-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.buy-cta h2 { font-size: 1.5rem; margin: 0 0 4px; }
+.buy-cta p { margin: 0; color: var(--dim); font-size: 0.92rem; }
+.lc-buy { display: block; margin-top: 10px; font-size: 0.84rem; font-weight: 600; color: var(--accent); }
+
+.bwf-scrim {
+  position: fixed; inset: 0; z-index: 60; background: rgba(3, 4, 9, .72); backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+}
+.bwf {
+  width: min(460px, 100%); max-height: calc(100vh - 32px); overflow-y: auto;
+  background: var(--panel); border: 1px solid var(--line-2); border-radius: 18px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .6); padding: 22px 22px 18px;
+}
+.bwf-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.bwf-head h2 { font-size: 1.35rem; margin: 0; }
+.bwf-x { background: none; border: 0; color: var(--dim); font-size: 26px; line-height: 1; cursor: pointer; padding: 4px 8px; border-radius: 8px; }
+
+/* The launch gate. Narrower than the buy dialog — it carries one sentence, and a 460px box around
+   one line reads as an error page rather than an answer. */
+.gate-panel { width: min(400px, 100%); }
+/* The launch-succeeded dialog. Wider than the gate's because it carries a full 44-character
+   address, which must not wrap mid-line into something that reads like two addresses. */
+.launched-panel { width: min(460px, 100%); }
+.launched-panel .ca-btn { width: 100%; margin: 4px 0 2px; }
+.launched-go { display: block; margin-top: 14px; text-align: center; }
+.gate-msg { margin: 0; padding: 6px 0 4px; color: var(--dim); font-size: 15px; }
+.bwf-x:hover { color: var(--text); background: var(--panel-2); }
+.bwf-step { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line); }
+.bwf-n {
+  width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center;
+  font-family: var(--mono); font-size: 12px; color: var(--accent); background: var(--accent-dim); border: 1px solid var(--accent-line);
+}
+.bwf-body { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.bwf-body strong { font-size: 0.95rem; }
+.bwf-amount { position: relative; }
+.bwf-amount .field { font-size: 1.3rem; padding-right: 64px; }
+.bwf-unit { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--dim); font-size: 0.85rem; }
+/**
+ * A row of choices shown all at once, where a dropdown would hide seven of eight behind a click.
+ * `.bwf-chip` below is the same shape inside the buy popup; these are the general ones.
+ */
+/* ⭐ A grid, not a wrapping flex row. The card is 581px wide, so eight across would leave 67px a
+   chip and "24 hours" does not fit that — four by two is even, roomy, and reads as a deliberate
+   block rather than a wrapping row that strands its last option. */
+.chips { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+@media (max-width: 460px) { .chips { grid-template-columns: repeat(2, 1fr); } }
+/* Two chips rather than eight. The four-column grid put them in the first two columns, which
+   reads as a row that failed to fill rather than a choice of two — so the pair is sized and
+   centred on the card's axis instead of stretched across it. */
+.chips.pair { grid-template-columns: repeat(2, minmax(0, 200px)); justify-content: center; }
+/* ⚠ The padding is what decides whether all eight windows sit on one row at the card's width;
+   at 16px the last one wrapped alone, which reads as an afterthought rather than a choice. */
+.chip {
+  background: var(--panel-2); border: 1px solid var(--line-2); color: var(--dim);
+  border-radius: 999px; padding: 9px 10px; font: inherit; font-size: 0.83rem; cursor: pointer;
+  text-align: center; white-space: nowrap;
+  transition: color .12s, border-color .12s, background .12s;
+}
+.chip:hover { color: var(--text); border-color: var(--line-2); background: rgba(255, 255, 255, .04); }
+.chip.on {
+  color: var(--text); font-weight: 600;
+  border-color: var(--accent-line); background: var(--accent-dim);
+}
+
+.bwf-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.bwf-chip { background: var(--panel-2); border: 1px solid var(--line-2); color: var(--dim); border-radius: 999px; padding: 6px 14px; font: inherit; font-size: 0.82rem; cursor: pointer; }
+.bwf-chip.on, .bwf-chip:hover { color: var(--text); border-color: var(--accent-line); }
+.bwf-quote { margin: 0; font-size: 0.86rem; color: var(--dim); }
+.bwf-quote b { color: var(--text); }
+.bwf-quote.warn { color: var(--warn); }
+.bwf-go { width: 100%; }
+.bwf-qr { border-radius: 12px; background: #fff; padding: 8px; align-self: flex-start; }
+.bwf-addr {
+  display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; cursor: pointer;
+  background: var(--bg-2); border: 1px solid var(--line-2); border-radius: 12px; padding: 10px 12px; color: var(--text); font-size: 0.8rem;
+}
+.bwf-addr span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
+.bwf-addr em { font-style: normal; color: var(--accent); font-family: var(--font); font-weight: 600; font-size: 0.8rem; }
+.bwf-status { margin-top: 6px; padding: 12px 14px; border-radius: 12px; font-size: 0.86rem; background: var(--bg-2); border: 1px solid var(--line); color: var(--dim); display: flex; gap: 10px; align-items: center; }
+.bwf-status.mine { color: var(--text); border-color: var(--accent-line); background: var(--accent-dim); }
+.bwf-status.someone { color: var(--text); }
+.bwf-pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex: none; animation: bwf-pulse 1.4s ease-in-out infinite; }
+@keyframes bwf-pulse { 0%, 100% { opacity: .25 } 50% { opacity: 1 } }
+.bwf-qr-wrap summary { cursor: pointer; color: var(--dim); font-size: 0.82rem; }
+.bwf-qr-wrap[open] summary { margin-bottom: 10px; }
+
+/* "Pump" in the wordmark takes the logo's green (#68D894 measured in logo.png, the same as --accent). */
+.pf-pump { color: var(--accent); }
+
+/* Filter pills wrap instead of running off the edge of a phone. */
+.tabs.pills { flex-wrap: wrap; }
+@media (max-width: 560px) {
+  .tabs.pills button { padding: 6px 12px; font-size: 13px; }
+  .explore-head h1, .page .pf-head h1 { font-size: 2rem; }
+}
+
+/* ── thumbs, not cursors ───────────────────────────────────────────────────────────────────────
+ *
+ * Every control small enough to be a comfortable click is too small to be a comfortable tap. The
+ * guideline is a 44px target; these were between 30 and 36. Only the HEIGHT changes — the type,
+ * the radius and the row layouts are untouched, so nothing reflows. */
+@media (max-width: 720px) {
+  .chip { min-height: 44px; display: grid; place-items: center; }
+  .tabs.pills button { min-height: 40px; }
+  .seg a { min-height: 40px; display: grid; place-items: center; }
+  .bwf-x { min-width: 44px; min-height: 44px; }
+  /* A link inside body copy is the one target that cannot be made bigger without spoiling the
+     text, so it gets breathing room instead of a box. */
+  .note a, .flat a { padding: 2px 0; }
+}
+
+/* The logo picker: a real button and the chosen file's name, instead of the browser's own control
+   (which rendered in the visitor's language and could not be styled). */
+/* ── the coin image field ──────────────────────────────────────────────────────────────────────
+ *
+ * The picture beside the target you drop onto, after ponscharity.family's launch form: the field
+ * IS the preview, rather than a button with a filename beside it. Empty, the tile holds our own
+ * mark at low contrast — a placeholder that looks like something, and one you can tell apart from
+ * a chosen image at a glance. */
+.imgfield { display: grid; grid-template-columns: 108px minmax(0, 1fr); gap: 12px; align-items: stretch; }
+.imgfield-tile {
+  border-radius: var(--r-card); overflow: hidden; display: grid; place-items: center;
+  background: var(--accent-dim); border: 1px solid var(--accent-line); min-height: 108px;
+}
+.imgfield-tile.has { background: var(--panel-2); border-color: var(--line-2); }
+.imgfield-tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.imgfield-mark { width: 54px !important; height: 54px !important; object-fit: contain !important; opacity: .55; }
+.imgfield-drop {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+  text-align: center; padding: 18px; cursor: pointer;
+  border: 1px dashed var(--line-2); border-radius: var(--r-card); background: var(--panel-2);
+  transition: border-color .15s, background .15s, color .15s;
+}
+.imgfield-drop:hover, .imgfield-drop.over { border-color: var(--accent); background: var(--accent-dim); }
+.imgfield-drop strong { font-size: 14px; font-weight: 600; }
+.imgfield-drop span { font-size: 12.5px; color: var(--dim); }
+.imgfield-drop input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
+/* A select has to read as the same control as the text fields beside it. */
+select.field {
+  appearance: none; cursor: pointer; padding-right: 34px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--dim) 50%), linear-gradient(135deg, var(--dim) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 55%, calc(100% - 13px) 55%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+select.field option { background: var(--panel); color: var(--text); }
+
+/* The form's action, sized to the column it sits in rather than to its own label. */
+.btn.block { display: flex; width: 100%; justify-content: center; }
+
+@media (max-width: 560px) {
+  .imgfield { grid-template-columns: 84px minmax(0, 1fr); }
+  .imgfield-tile { min-height: 84px; }
+}
+
+.filepick { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.filepick input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.filepick .name { color: var(--dim); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+
+.back-link { display: inline-block; margin: 0 0 18px; color: var(--dim); font-size: 0.9rem; }
+.back-link:hover { color: var(--text); }
+@media (max-width: 560px) {
+  .chart-mult { display: block; margin-top: 2px; }
+  .buy-cta .btn.lg { width: 100%; }
+}
+
+.pos-mobile-status { display: none; }
+/* 860 is where the table's own rules hide the status and next columns. */
+@media (max-width: 860px) {
+  .pos-mobile-status { display: flex; align-items: center; gap: 8px; margin-top: 6px; font-size: 12px; flex-wrap: wrap; }
+}
+@media (max-width: 560px) {
+  .ed-statement { font-size: 1.15rem !important; line-height: 1.45 !important; }
+}
+@media (max-width: 560px) {
+  table.q th, table.q td { padding-left: 6px; padding-right: 6px; font-size: 12px; }
+}
+
+/* Pair picker: pump.fun's custom-pair tokens, searchable. */
+.pair-pick { margin-top: 14px; }
+.pair-list { margin-top: 10px; max-height: 260px; overflow-y: auto; display: grid; gap: 4px; border: 1px solid var(--line); border-radius: 12px; padding: 6px; }
+.pair-row { display: grid; grid-template-columns: 24px auto 1fr; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; background: transparent; border: 1px solid transparent; color: var(--text); text-align: left; cursor: pointer; font: inherit; min-width: 0; }
+.pair-row span { color: var(--dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pair-row:hover { background: rgba(255, 255, 255, .04); }
+.pair-row.on { border-color: var(--accent); }
+.chips + .note, .pair-pick + .note { margin-top: 12px; }
+.chips.fees { grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 460px) { .chips.fees { grid-template-columns: repeat(3, 1fr); } }
+.pair-chosen { display: grid; grid-template-columns: 24px auto 1fr auto; align-items: center; gap: 10px; width: 100%; text-align: left; cursor: pointer; font: inherit; color: var(--text); }
+.pair-chosen span { color: var(--dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pair-chosen em { font-style: normal; color: var(--accent); font-size: 13px; }

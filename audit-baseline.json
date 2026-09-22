@@ -1,0 +1,9 @@
+{
+  "_why": "PD-19. Advisories accepted on 2026-09-22, each with no fixed release in any version: bigint-buffer (GHSA-3gc7-fjrx-p6mg) reaches us through @solana/spl-token and decodes fixed-width chain fields, never attacker-sized buffers. Anything new fails check-audit.mjs.",
+  "root": [
+    "GHSA-3gc7-fjrx-p6mg"
+  ],
+  "web": [
+    "GHSA-3gc7-fjrx-p6mg"
+  ]
+}

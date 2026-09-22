@@ -1,0 +1,55 @@
+{
+  "capturedAt": "2026-09-20",
+  "source": "frontend-api-v3.pump.fun/coins",
+  "coins": [
+    {
+      "symbol": "wApe",
+      "mint": "7Y12HYzvC1G1DdJyt4AXUEVi6Fe8taFYBX1c6M2Tpump",
+      "virtualSolReserves": 21771491295,
+      "virtualTokenReserves": 1071513639795654,
+      "marketCapSol": 20.318445315499662,
+      "usdMarketCap": 2240.1320559139835
+    },
+    {
+      "symbol": "$AURA",
+      "mint": "7ue58jm9B1H1EDfaWcR8ATy5yYBJZNxWPgCjr3SCpump",
+      "virtualSolReserves": 20297901817,
+      "virtualTokenReserves": 1068442116665283,
+      "marketCapSol": 18.99766164249667,
+      "usdMarketCap": 2094.6251797167556
+    },
+    {
+      "symbol": "TELEGRPH",
+      "mint": "GDeyYxxisi6EuXe6XnKodCVjyz4yoan6ztBRim5Dpump",
+      "virtualSolReserves": 30987654320,
+      "virtualTokenReserves": 1038800796845859,
+      "marketCapSol": 29.830218088096114,
+      "usdMarketCap": 3288.990355739213
+    },
+    {
+      "symbol": "PumpPay",
+      "mint": "FmEMbkstpdn9F6mKGiZYymQsmK4GGPhogcnMSwbEBVqr",
+      "virtualSolReserves": 30000000001,
+      "virtualTokenReserves": 1073000000000000,
+      "marketCapSol": 27.95899347716682,
+      "usdMarketCap": 3082.6747438119824
+    },
+    {
+      "symbol": "PumpPay",
+      "mint": "2fxRpi7Hy2JbueURMDYCGMwLKAe38VipwmpARhmKSD96",
+      "virtualSolReserves": 30000000001,
+      "virtualTokenReserves": 1073000000000000,
+      "marketCapSol": 27.95899347716682,
+      "usdMarketCap": 3082.6747438119824
+    },
+    {
+      "symbol": "PumpPay",
+      "mint": "CggSU25PhBZKGuHNM5z6WoC1YhF8vVXFB7Nnjtkjpwnk",
+      "virtualSolReserves": 30000000000,
+      "virtualTokenReserves": 1073000000000000,
+      "marketCapSol": 27.958993476234856,
+      "usdMarketCap": 3069.4817255240823
+    }
+  ],
+  "note": "Real coins read from pump.fun's own API on 20 Sep 2026, with the market caps IT displays. marketCapSol pins our curve arithmetic against theirs exactly; usdMarketCap/marketCapSol is the SOL price they priced it at, which their snapshots take a few seconds apart \u2014 so the USD check carries a tolerance and the SOL one does not."
+}

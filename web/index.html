@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+
+    <!-- ⛔ The name alone. It is what sits beside the favicon in a tab strip and in a bookmark,
+         and a tagline there is read as part of the name. The description below is where the
+         sentence belongs. -->
+    <title>Pump Family</title>
+    <meta name="description" content="Launch a coin on pump.fun with a window you set. During it, the only way to buy is to send USDC from the FOMO app. Then it launches and trades everywhere." />
+
+    <!-- ⚠ og:image MUST be absolute. A relative path renders a blank card on X — it has bitten
+         this operator before, on COMPANY. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Pump Family" />
+    <meta property="og:title" content="Pump Family — every token starts on FOMO" />
+    <meta property="og:description" content="Launch a coin on pump.fun with a window you set. During it, the only way to buy is to send USDC from the FOMO app. Then it launches and trades everywhere." />
+    <meta property="og:url" content="https://pump.family/" />
+    <meta property="og:image" content="https://pump.family/banner.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="400" />
+
+    <!-- ⚠ X caches a link's card by URL and holds it for days. Changing anything here does NOT
+         update a card it has already built: the only reliable way to force a re-crawl is to share
+         a URL it has not seen, e.g. https://pump.family/?v=2 once. This site serves the HTML
+         `no-cache` precisely so that a re-crawl always picks up the current tags. -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@pumpdotfamily" />
+    <meta name="twitter:creator" content="@pumpdotfamily" />
+    <meta name="twitter:title" content="Pump Family — every token starts on FOMO" />
+    <meta name="twitter:description" content="Launch a coin on pump.fun with a window you set. During it, the only way to buy is to send USDC from the FOMO app. Then it launches and trades everywhere." />
+    <meta name="twitter:image" content="https://pump.family/banner.png" />
+
+    <!-- Fonts are linked here rather than @import-ed from the stylesheet: an @import is
+         discovered only after the CSS has been fetched and parsed, so it serialises two round
+         trips before any text can paint. preconnect opens the connections while the HTML is
+         still being read. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+
+    <!-- The ground the design is built on. Matters before the CSS lands: a browser painting the
+         old near-white default behind a dark page is a flash every visitor sees. -->
+    <meta name="theme-color" content="#06070e" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

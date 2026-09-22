@@ -1,0 +1,19 @@
+{
+  "name": "pumpfamily-indexer",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "description": "Sale discovery for Pump Family: logs and signature history in, a listing out. Exists because getProgramAccounts is 403-blocked on the operator's RPC plan.",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node indexer.test.mjs"
+  },
+  "dependencies": {
+    "@noble/hashes": "^2.3.0",
+    "@solana/spl-token": "^0.4.15",
+    "@solana/web3.js": "^1.98.4"
+  },
+  "engines": {
+    "node": ">=22.5"
+  }
+}

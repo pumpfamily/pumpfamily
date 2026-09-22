@@ -1,0 +1,52 @@
+{
+  "note": "Real mainnet accounts, read 18 Sep 2026. Pinned so the decoders are tested against bytes pump.fun actually wrote.",
+  "accounts": {
+    "curve-usdc-live": {
+      "address": "5visHAwxEktmh1JiQpVRLGG8nqXQF4mKBxjqV6TNYWFp",
+      "owner": "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P",
+      "data": "F7f4N2DYrGAAENhH488DAAi50v8AAAAAAHjF+1HRAgAIAAAAAAAAAACAxqR+jQMAAJa5mJD+TGaJw/anEYaPXFfCcvib10AWA2Ow/qmZ9kjkAAHG+nrzvtutOj1l82qryXQxsbvkwtL24OR8pgIDRS9dYQ=="
+    },
+    "curve-migrated": {
+      "address": "BLmPA2A7WE9EBBiQgzZdWdfbdo7Vd3MqZNQaa3rFgZdr",
+      "owner": "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P",
+      "data": "F7f4N2DYrGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAxqR+jQMAAbBbbz4pPBXLs+7shBv5Q1naIUv8h55FfoUuj31PpxKQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
+    },
+    "pool-migrated": {
+      "address": "GRsJJtXGuAQetRpjVu1QYnTS6vGUXchQRCKvrgv7DCsS",
+      "owner": "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA",
+      "data": "8ZptBBGxbbz/AACArd3ZPrqmAiy+JVex69bAiEoel2EXHvHHtb/ZZH2C7T0iRYqlVlXhdalZHAuOEfb4cQZlZEyuA6PL8h7ICmIDBpuIV/6rgYT7aH9jRhjANdrEOdwa6ztVmKDwAAAAAAEk2LHAsRBcXGjeSF+yOPxAIbpi3Yt0ZCsGRn/1uXMLI48V2jQl0EScbynv0o0WjB2aZhn4sOdr09m/7J37CMvdexM8yxu0xqe7DBcPCxaB9StBclenMatiATQQqL/UG+W6j2tZ0AMAALBbbz4pPBXLs+7shBv5Q1naIUv8h55FfoUuj31PpxKQAABtQh4YBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
+    },
+    "pool-base-ta": {
+      "address": "AdYdNcuQDEgXVAC8q2xNctcyjucvkpK56VtyuLUEvNPv",
+      "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+      "data": "PSJFiqVWVeF1qVkcC44R9vhxBmVkTK4Do8vyHsgKYgPlPh2s3uC2UxlZpq47kzwLTLz7zh3GLzBUwHRsl/DZmfcWKRkkVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgcAAAA="
+    },
+    "pool-quote-ta": {
+      "address": "9HSAK58DVxy2S4UJv8Pzq1LXP8fEjgz5U1f1Z1DWbWF6",
+      "owner": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "data": "BpuIV/6rgYT7aH9jRhjANdrEOdwa6ztVmKDwAAAAAAHlPh2s3uC2UxlZpq47kzwLTLz7zh3GLzBUwHRsl/DZmWoogCMvAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAAA4thYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "curve-sol-live-2026-09-21": {
+      "mint": "3ik4E5V7viXy6ySgz7VcgHHhJ6dHygi9dcNBze25pump",
+      "address": "BdNffKA8w4P2zDiW9Lv2zxr2BFB1Ah6SuZLESBRvxUmT",
+      "data": "F7f4N2DYrGD/kJ5gDaACAO4gjyQKAAAA//iLFHyhAQDudGsoAwAAAACAxqR+jQMAAAozjGp4lPn0nN9/CMELYUs8EM5ykhX+d2ugcoWVX0vRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+      "bytes": 125
+    },
+    "curve-quotemint-live-2026-09-21": {
+      "mint": "GrE8RbZCbLQegssrAvgUBfDwtbQVvZkRfVu5b3FS2trp",
+      "address": "B9H7W5wUNdpYERzDeBsfbu5WaMrBDqmhukQLJrtf4BKF",
+      "data": "F7f4N2DYrGAAENhH488DACoWrQEAAAAAAHjF+1HRAgACAAAAAAAAAACAxqR+jQMAAG+ykO5gUuc1EY5st/vQdqAw/4eJ16kY7AI9TxicfYSNAAAGgJ7cv3QlqzNYXckcvuzhehb+FLCqPbXi4XlUIe+FgGQAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+      "bytes": 151
+    },
+    "curve-short-migrated-2026-09-21": {
+      "mint": "8i51XNNpGaKaj4G4nDdmQh95v4FKAxw8mhtaRoKd9tE8",
+      "address": "HLpNDdE5sUHimx6PGU8A9xLNoFgVqqDDqQnqPAFSypoi",
+      "data": "F7f4N2DYrGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAxqR+jQMAAQ==",
+      "bytes": 49
+    }
+  },
+  "recaptured": {
+    "at": "2026-09-21",
+    "note": "three live BondingCurve shapes: 49-byte migrated, current SOL, current quote-mint"
+  }
+}

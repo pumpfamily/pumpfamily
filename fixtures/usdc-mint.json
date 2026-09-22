@@ -1,0 +1,13 @@
+{
+ "pubkey": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+ "account": {
+  "lamports": 534633977876,
+  "data": [
+   "AQAAAH/v2G+3C6kB1e+Jr/1dydn696wtVmgmlBjL0iG7fKjMkwE+VXIYGwAGAQEAAABicKqKWcWUBbRShshncubNEm6bil06OFNtN/e0FOi2Zw==",
+   "base64"
+  ],
+  "owner": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+  "executable": false,
+  "rentEpoch": 0
+ }
+}
